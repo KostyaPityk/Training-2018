@@ -35,5 +35,13 @@ namespace Permutation_Of_Bits.NUnitTests
         [Test]
         public void Permutation_Of_Bits_Negative_FirstIndex_ArgumentOutOfRangeException() =>
             Assert.Throws(typeof(ArgumentOutOfRangeException), () => Permutation_Of_Bits.InputNumber(15, 15, -1, 8));
+
+        [Test]
+        public void Permutation_Of_Bits_Negative_SecondIndex_ArgumentOutOfRangeException() =>
+            Assert.Throws(typeof(ArgumentOutOfRangeException), () => Permutation_Of_Bits.InputNumber(15, 15, 1, -8));
+
+        [Test]
+        public void Permutation_Of_Bits_FirstIndexOutOfRange_ArgumentOutOfRangeException() =>
+            Assert.Throws(typeof(ArgumentOutOfRangeException), () => Permutation_Of_Bits.InputNumber(15, 15, 50, 10));
     }
 }

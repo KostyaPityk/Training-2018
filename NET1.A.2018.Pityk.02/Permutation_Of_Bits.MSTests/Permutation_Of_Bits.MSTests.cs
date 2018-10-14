@@ -60,5 +60,15 @@ namespace Permutation_Of_Bits.MSTests
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Permutation_Of_Bits_Negative_FirstIndex_ArgumentOutOfRangeException()
           => Permutation_Of_Bits.InputNumber(15, 15, -1, 8);
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Permutation_Of_Bits_Negative_SecondIndex_ArgumentOutOfRangeException()
+          => Permutation_Of_Bits.InputNumber(15, 15, 1, -8);
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Permutation_Of_Bits_FirstIndexOutOfRange_ArgumentOutOfRangeException()
+          => Permutation_Of_Bits.InputNumber(15, 15, 50, 10);
     }
 }

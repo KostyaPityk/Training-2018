@@ -50,14 +50,14 @@ namespace Permutation_Of_Bits
                 throw new ArgumentOutOfRangeException("Your first position bigger then last");
             }
 
-            if (i < 0)
+            if (i < 0 || i > 32)
             {
-                throw new ArgumentOutOfRangeException("Your first position less then zero");
+                throw new ArgumentOutOfRangeException("Your first position less then zero or great then 32");
             }
 
-            if (j > 32)
+            if (j > 32 || j < 0)
             {
-                throw new ArgumentOutOfRangeException("Your last position great then 32 (Maximum amount of bits in Int.32 )");
+                throw new ArgumentOutOfRangeException("Your last position great then 32 or less then zero");
             }
 
         }
