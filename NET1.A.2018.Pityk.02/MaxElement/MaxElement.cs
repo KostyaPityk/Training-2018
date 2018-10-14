@@ -14,6 +14,9 @@ namespace MaxElement
         /// <param name="array">Array to search</param>
         /// <param name="max">Search result, the result is placed in this variable</param>
         /// <returns>Max element in array</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Raises if given array is null
+        /// </exception>
         public static int? SearchMaxElement(int[] array, int? max = null)
         {
             CheckParameters(array);
