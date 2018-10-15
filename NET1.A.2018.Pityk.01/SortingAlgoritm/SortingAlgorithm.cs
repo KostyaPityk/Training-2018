@@ -1,66 +1,70 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SortingAlgorithm
 {
     /// <summary>
     ///  Class of sorting of integer numbers, contains sorting: Merge and Quick
     /// </summary>
-    public class SortingAlgorithm
+    public static class SortingAlgorithm
     {
         #region Public methods
         /// <summary>
         /// Sorting array of integer values using Merge sort
         /// </summary>
-        /// <param name="array">Array</param>
+        /// <param name="array">Array for sorting</param>
+        /// <exception cref="ArgumentNullException">
+        /// Raises if given array is null
+        /// </exception>
         public static void MergeSort(int[] array)
         {
             CheckArray(array);
 
-            if (array.Length > 1)
+            if (array.Length <= 1)
             {
-                int middle = array.Length / 2;
-                int[] lefthalf = array.Take(middle).ToArray();
-                int[] righthalf = array.Skip(middle).ToArray();
+                return;
+            }
 
-                MergeSort(lefthalf);
-                MergeSort(righthalf);
+            int middle = array.Length / 2;
+            int[] lefthalf = new int[middle];
+            int[] righthalf = new int[array.Length - middle];
 
-                int i = 0, j = 0, k = 0;
+            Array.Copy(array, 0, lefthalf, 0, middle);
+            Array.Copy(array, middle, righthalf, 0, righthalf.Length);
 
-                while (i < lefthalf.Length && j < righthalf.Length)
-                {
-                    if (lefthalf[i] < righthalf[j])
-                    {
-                        array[k] = lefthalf[i];
-                        i++;
-                    }
-                    else
-                    {
-                        array[k] = righthalf[j];
-                        j++;
-                    }
+            MergeSort(lefthalf);
+            MergeSort(righthalf);
 
-                    k++;
-                }
+            int i = 0, j = 0, k = 0;
 
-                while (i < lefthalf.Length)
+            while (i < lefthalf.Length && j < righthalf.Length)
+            {
+                if (lefthalf[i] < righthalf[j])
                 {
                     array[k] = lefthalf[i];
                     i++;
-                    k++;
                 }
-
-                while (j < righthalf.Length)
+                else
                 {
                     array[k] = righthalf[j];
                     j++;
-                    k++;
                 }
+
+                k++;
             }
+
+            while (i < lefthalf.Length)
+            {
+                array[k] = lefthalf[i];
+                i++;
+                k++;
+            }
+
+            while (j < righthalf.Length)
+            {
+                array[k] = righthalf[j];
+                j++;
+                k++;
+            }   
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SortingAlgorithm;
 using System.Linq;
 using System.Collections.Generic;
+// Fixed Array.Sort()
 
 namespace SortingAlgorithm.Test
 {
