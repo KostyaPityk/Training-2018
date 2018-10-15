@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace SearchInArray
 {
     /// <summary>
     /// Contains method SearchIndex which looks for an array element whose sum of elements on the right and left is the same
     /// </summary>
-    public class SearchInArray
+    public static class SearchInArray
     {
         /// <summary>
         /// Search maximum element in array
@@ -22,7 +22,10 @@ namespace SearchInArray
 
             for (int i = 1; i < array.Length; i++)
             {
-                if (array.Take(i).Sum().ToString().Equals(array.Skip(i + 1).Sum().ToString()))
+                double leftSum = array.Take(i).SumOfArray();
+                double rightSum = array.Skip(i + 1).SumOfArray();
+
+                if (leftSum.ToString().Equals(rightSum.ToString()))
                 {
                     return i;
                 }
@@ -42,7 +45,35 @@ namespace SearchInArray
         {
             if (array == null)
             {
-                throw new ArgumentNullException("Invalid array format");
+                throw new ArgumentNullException(nameof(array), "Invalid array format");
+            }
+        }
+
+        private static double SumOfArray(this IEnumerable<double> array)
+        {
+            double result = 0;
+
+            foreach (double number in array)
+            {
+                result += number;
+            }
+
+            return result;
+        }
+
+        private static IEnumerable<double> Skip(this double[] array, int index)
+        {
+            for (int i = index; i < array.Length; i++)
+            {
+                yield return array[i];
+            }
+        }
+
+        private static IEnumerable<double> Take(this double[] array, int index)
+        {
+            for (int i = 0; i < index; i++)
+            {
+                yield return array[i];
             }
         }
     }

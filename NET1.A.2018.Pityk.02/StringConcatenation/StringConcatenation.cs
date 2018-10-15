@@ -20,7 +20,7 @@ namespace StringConcatenation
         /// </exception>
         public static string Concatenation(string first_string, string second_string)
         {
-            if (first_string == null | second_string == null)
+            if (first_string == null || second_string == null)
             {
                 throw new ArgumentNullException("Invalid, String is null");
             }
@@ -50,7 +50,7 @@ namespace StringConcatenation
         /// <returns>True, if check string contains only letter, else False</returns>
         private static bool ChechedString(string first_string, string second_string)
         {
-           return first_string.All(c => char.IsLetter(c)) & second_string.All(c => char.IsLetter(c));
+           return first_string.All(c => char.IsLetter(c)) && second_string.All(c => char.IsLetter(c));
         }
     }
 }

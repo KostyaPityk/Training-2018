@@ -14,7 +14,7 @@ namespace Permutation_Of_Bits
         /// <param name="firstNumber">First number</param>
         /// <param name="secondNumber">Second number</param>
         /// <param name="i">First position of bit</param>
-        /// <param name="j">Second poistion of bit</param>
+        /// <param name="j">Second position of bit</param>
         /// <returns>Value after permutation bits</returns>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Raises an exception if given positions are not valid
@@ -22,13 +22,16 @@ namespace Permutation_Of_Bits
         public static int InputNumber(int firstNumber, int secondNumber, int i, int j)
         {
             CheckParameters(i, j);
+
             //Permution bits two to get range from i to j
             int range = 2 << j - i;
+
             //Get length from range
             int length = range - 1;
 
             // Permutation bits to left side to get bits mask
             int bitsMask = length << i;
+
             //Shifting second number's bits, get bits that  range from i to j 
             int secondNumberShifted = secondNumber << i;
 

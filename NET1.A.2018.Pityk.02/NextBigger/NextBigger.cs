@@ -23,7 +23,7 @@ namespace NextBigger
         /// Valid result of searching number and time of executing program in ValueTuple item
         /// and using out paramaters
         /// </returns>
-        ///<exception cref="ArgumentException">
+        /// <exception cref="ArgumentException">
         /// if input negative number
         /// </exception>
         public static (int Result, int Time) FindNextBiggerNumber(int number, out int time)
@@ -35,7 +35,7 @@ namespace NextBigger
 
             string str = number.ToString();
             List<int> str_int = str.Select(c => (int)char.GetNumericValue(c)).ToList();
-            string finish = "";
+            string finish = string.Empty;
             List<int> sort_list = new List<int>();
             int max = str_int[str_int.Count - 1];
             int temp = 0;
@@ -45,6 +45,7 @@ namespace NextBigger
                 if (max <= str_int[j])
                 {
                     sort_list.Add(str_int[j]);
+
                     if (j == 0)
                     {
                         continue;

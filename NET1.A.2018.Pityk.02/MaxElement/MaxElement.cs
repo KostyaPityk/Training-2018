@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 
+//Fixed ling, write method from sum element array
 namespace MaxElement
 {
     /// <summary>
