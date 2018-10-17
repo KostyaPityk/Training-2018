@@ -1,123 +1,30 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data;
 
 namespace NewtonMethod.MSTest
 {
     [TestClass]
     public class NewtonMethodMSTest
     {
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test1()
+        private TestContext testContextInstanse;
+
+        public TestContext TestContext
         {
-            double number = 1;
-            double degrre = 5;
-            double accuracy = 0.001;
-            double expected = 1;
-
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
+            get { return testContextInstanse; }
+            set { testContextInstanse = value; }
         }
 
         [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test2()
+        [DataSource("Microsoft.VisualStudio.TestTools.DataSource.CSV", "|DataDirectory|\\NewtonMethodData.csv",
+            "NewtonMethodData#csv", DataAccessMethod.Sequential), DeploymentItem("NewtonMethodData.csv")]
+        public void NewtonMethod_ValidData_ValidResult_Test()
         {
-            double number = 8;
-            double degrre = 3;
-            double accuracy = 0.0001;
-            double expected = 2;
+            double number = double.Parse(TestContext.DataRow["Number"].ToString());
+            double degrre = double.Parse(TestContext.DataRow["Degree"].ToString());
+            double accuracy = double.Parse(TestContext.DataRow["Accuracy"].ToString());
+            double expected = double.Parse(TestContext.DataRow["Expected"].ToString());
 
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test3()
-        {
-            double number = 0.001;
-            double degrre = 3;
-            double accuracy = 0.0001;
-            double expected = 0.1;
-            
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test4()
-        {
-            double number = 0.04100625;
-            double degrre = 4;
-            double accuracy = 0.0001;
-            double expected = 0.45;
-            
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test5()
-        {
-            double number = 8;
-            double degrre = 3;
-            double accuracy = 0.0001;
-            double expected = 2;
-            
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test6()
-        {
-            double number = 0.0279936;
-            double degrre = 7;
-            double accuracy = 0.0001;
-            double expected = 0.6;
-           
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test7()
-        {
-            double number = 0.0081;
-            double degrre = 4;
-            double accuracy = 0.1;
-            double expected = 0.3;
-            
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test8()
-        {
-            double number = -0.008;
-            double degrre = 3;
-            double accuracy = 0.1;
-            double expected = -0.22;
-            
-            double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
-
-            Assert.AreEqual(expected, result, accuracy);
-        }
-
-        [TestMethod]
-        public void NewtonMethod_ValidData_ValidResult_Test9()
-        {
-            double number = 0.004241979;
-            double degrre = 9;
-            double accuracy = 0.00000001;
-            double expected = 0.545;
-            
             double result = NewtonMethod.FindNthRoot(number, degrre, accuracy);
 
             Assert.AreEqual(expected, result, accuracy);
