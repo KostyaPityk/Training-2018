@@ -25,20 +25,20 @@ namespace NewtonMethod
         /// If Accuracy must be greater than zero and less than one or
         /// Degree must be greater than zero
         /// </exception>
-        public static double FindNthRoot(double number, double degree, double accuracy)
+        public static double FindNthRoot(double number, int degree, double accuracy)
         {
             CheckDate(number, degree, accuracy);
 
-            double x0 = number / degree;
-            double x1 = (1 / degree) * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
+            double current = number / degree;
+            double previous = (1 / (double)degree) * (((double)degree - 1) * current + number / Math.Pow(current, degree - 1));
 
-            while (Math.Abs(x1 - x0) > accuracy)
+            while (Math.Abs(previous - current) > accuracy)
             {
-                x0 = x1;
-                x1 = (1 / degree) * ((degree - 1) * x0 + number / Math.Pow(x0, degree - 1));
+                current = previous;
+                previous = (1 / (double)degree) * (((double)degree - 1) * current + number / Math.Pow(current, degree - 1));
             }
 
-            return x1;
+            return previous;
         }
         #endregion
 

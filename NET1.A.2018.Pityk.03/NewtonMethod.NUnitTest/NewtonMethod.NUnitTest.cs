@@ -15,7 +15,7 @@ namespace NewtonMethod.NUnitTest
         [TestCase(0.0081, 4, 0.1, 0.3)]
         [TestCase(-0.008, 3, 0.1, -0.22)]
         [TestCase(0.004241979, 9, 0.00000001, 0.545)]
-        public void NewtonMethod_ValidData_ValidResult(double number, double degree, double accuracy, double expected)
+        public void NewtonMethod_ValidData_ValidResult(double number, int degree, double accuracy, double expected)
         {
             double result = NewtonMethod.FindNthRoot(number, degree, accuracy);
 
