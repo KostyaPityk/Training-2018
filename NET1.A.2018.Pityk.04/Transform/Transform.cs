@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DoubleExtention;
 
 namespace Transform
 {
@@ -22,19 +20,18 @@ namespace Transform
         /// </exception>
         /// <returns>Transforms string array</returns>
         public static string[] TransformToWords(double[] array)
-        {
-            CheckFromNull(array);
+             => CommonTransform(TransformToWords, array);
 
-            string[] result = new string[array.Length];
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                result[i] = TransformToWords(array[i]);
-            }
-
-            return result;
-        }
-
+        /// <summary>
+        /// Transform array of real numbers to array of strings by format IEEE754
+        /// </summary>
+        /// <param name="array">Array to be transforms</param>
+        /// <exception cref="ArgumentNullException">
+        /// Raises if given array is null
+        /// </exception>
+        /// <returns>Transforms string array</returns>
+        public static string[] TransformToIEEEFormat(double[] array)
+             => CommonTransform(DoubleExtention.DoubleExtention.ToBinaryString, array);
         #endregion
 
         #region Privete methods
@@ -45,54 +42,41 @@ namespace Transform
         /// <returns>Transforms string word format digit</returns>
         private static string TransformToWords(double digit)
         {
+            Dictionary<char, string> dictionarywords = new Dictionary<char, string>
+            {
+                { '-', "minus" },
+                { ',', "point" },
+                { '0', "zero" },
+                { '1', "one" },
+                { '2', "two" },
+                { '3', "three" },
+                { '4', "four" },
+                { '5', "five" },
+                { '6', "six" },
+                { '7', "seven" },
+                { '8', "eight" },
+                { '9', "nine" }
+            };
             string string_digit = digit.ToString();
             string result = string.Empty;
             
-            foreach (char temp in string_digit)
+            foreach (char symbol in string_digit)
             {
-                string symbol = temp.ToString();
+                result += dictionarywords[symbol] + " ";
+            }
 
-                switch (symbol)
-                {
-                    case "-":
-                        result += DigitToWords.minus;
-                        break;
-                    case ",":
-                        result += DigitToWords.point;
-                        break;
-                    case "0":
-                        result += DigitToWords.zero;
-                        break;
-                    case "1":
-                        result += DigitToWords.one;
-                        break;
-                    case "2":
-                        result += DigitToWords.two;
-                        break;
-                    case "3":
-                        result += DigitToWords.three;
-                        break;
-                    case "4":
-                        result += DigitToWords.four;
-                        break;
-                    case "5":
-                        result += DigitToWords.five;
-                        break;
-                    case "6":
-                        result += DigitToWords.six;
-                        break;
-                    case "7":
-                        result += DigitToWords.seven;
-                        break;
-                    case "8":
-                        result += DigitToWords.eight;
-                        break;
-                    case "9":
-                        result += DigitToWords.nine;
-                        break;
-                }
+            return result;
+        }
 
-                result += " ";
+        private static string[] CommonTransform(Func<double, string> method, double[] array)
+        {
+            CheckFromNull(array);
+
+            string[] result = new string[array.Length];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                result[i] = method.Invoke(array[i]);
             }
 
             return result;
