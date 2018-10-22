@@ -11,55 +11,12 @@ namespace GCD
     {
         #region Public methods
         /// <summary>
-        /// Represents method of evaluating GDC using Euclidean algorithm. Receive arbitrary arguments.
-        /// </summary>
-        /// <param name="time">Time of execution in milliseconds</param>
-        /// <param name="numbers">Numbers</param>
-        /// <returns>GDC for given data and time work</returns>
-        public static (int GCD, int Time) EuclidGCD(out int time, params int[] numbers)
-        {
-            CheckFromNull(numbers);
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
-            int GDC = Euclidean(numbers);
-
-            timer.Stop();
-
-            time = timer.Elapsed.Milliseconds;
-            return (GDC, time);
-        }
-
-        /// <summary>
-        /// Represents method of evaluating GDC using Stein algorithm. Receive arbitrary arguments.
-        /// </summary>
-        /// <param name="time">Time of execution in milliseconds</param>
-        /// <param name="numbers">Numbers</param>
-        /// <returns>GDC for given data and time work</returns>
-        public static (int GCD, int Time) SteinGDC(out int time, params int[] numbers)
-        {
-            CheckFromNull(numbers);
-            Stopwatch timer = new Stopwatch();
-            timer.Start();
-
-            int GDC = Stein(numbers);
-
-            timer.Stop();
-
-            time = timer.Elapsed.Milliseconds;
-            return (GDC, time);
-        }
-
-        #endregion
-
-        #region Private methods
-        /// <summary>
-        /// Represents algorithm of Euclid for evaluation GDC 
+        /// Represents algorithm of Euclid for evaluation GDC for 2 numbers
         /// </summary>
         /// <param name="first">First number</param>
         /// <param name="second">Second number</param>
         /// <returns>GDC of given numbers</returns>
-        private static int Euclidean(int first, int second)
+        public static int Euclidean(int first, int second)
         {
             first = Math.Abs(first);
             second = Math.Abs(second);
@@ -80,12 +37,12 @@ namespace GCD
         }
 
         /// <summary>
-        /// Represents algorithm of Stein for evaluation GDC 
+        /// Represents algorithm of Stein for evaluation GDC for 2 numbers
         /// </summary>
         /// <param name="first">First number</param>
         /// <param name="second">Second number</param>
         /// <returns>GDC of given numbers</returns>
-        private static int Stein(int first, int second)
+        public static int Stein(int first, int second)
         {
             first = Math.Abs(first);
             second = Math.Abs(second);
@@ -94,7 +51,7 @@ namespace GCD
             {
                 return first;
             }
-               
+
             if (first == 0)
             {
                 return second;
@@ -130,6 +87,69 @@ namespace GCD
             return Stein((second - first) >> 1, first);
         }
 
+        /// <summary>
+        /// Represents algorithm of Euclid for evaluation GDC for third numbers
+        /// </summary>
+        /// <param name="first">First number</param>
+        /// <param name="second">Second number</param>
+        /// <param name="third">Third number</param>
+        /// <returns>GDC of given numbers</returns>
+        public static int Euclidean(int first, int second, int third)
+            => Euclidean(Euclidean(first, second), third);
+
+        /// <summary>
+        /// Represents algorithm of Stein for evaluation GDC for third numbers
+        /// </summary>
+        /// <param name="first">First number</param>
+        /// <param name="second">Second number</param>
+        /// <param name="third">Third number</param>
+        /// <returns>GDC of given numbers</returns>
+        public static int Srein(int first, int second, int third)
+            => Stein(Stein(first, second), third);
+
+        /// <summary>
+        /// Represents method of evaluating GDC using Euclidean algorithm. Receive arbitrary arguments.
+        /// </summary>
+        /// <param name="time">Time of execution in milliseconds</param>
+        /// <param name="numbers">Numbers</param>
+        /// <returns>GDC for given data and time work</returns>
+        public static int EuclidGCD(out int time_Milliseconds, params int[] numbers)
+        {
+            CheckFromNull(numbers);
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int GDC = Euclidean(numbers);
+
+            timer.Stop();
+
+            time_Milliseconds = timer.Elapsed.Milliseconds;
+            return GDC;
+        }
+
+        /// <summary>
+        /// Represents method of evaluating GDC using Stein algorithm. Receive arbitrary arguments.
+        /// </summary>
+        /// <param name="time">Time of execution in milliseconds</param>
+        /// <param name="numbers">Numbers</param>
+        /// <returns>GDC for given data and time work</returns>
+        public static int SteinGDC(out int time_Milliseconds, params int[] numbers)
+        {
+            CheckFromNull(numbers);
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int GDC = Stein(numbers);
+
+            timer.Stop();
+
+            time_Milliseconds = timer.Elapsed.Milliseconds;
+            return GDC;
+        }
+
+        #endregion
+
+        #region Private methods
         /// <summary>
         /// Represents algorithm of Euclidean for evaluation GDC 
         /// </summary>
