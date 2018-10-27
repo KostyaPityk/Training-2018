@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Polynomial
 {
-    public sealed class Polynomial
+    public sealed class Polynomial : ICloneable, IEquatable<Polynomial>
     {
         private static readonly double COMPARISON = 10e-5;
         private readonly double[] coefficients;
@@ -45,6 +45,29 @@ namespace Polynomial
                 coefficients[index] = value;
             }
         }
+        #region ICloneable
+        /// <summary>
+        ///  Explicit implementation of IClonable
+        /// </summary>
+        /// <returns>Clone of this Polynomial</returns>
+        object ICloneable.Clone() => Clone();
+
+        /// <summary>
+        /// Clone implementation for Polynomial instance
+        /// </summary>
+        /// <returns>Clone of this Polynomial</returns>
+        public Polynomial Clone() => new Polynomial(coefficients);
+        #endregion
+
+        #region IEquatable
+        /// <summary>
+        /// Implementation of overloaded version of Equals for Polynomial instance
+        /// </summary>
+        /// <param name="compared"></param>
+        /// <returns>Bool value of equality of two objects</returns>
+        public bool Equals(Polynomial compared) => this == compared;
+        #endregion
+
         #region Overriding methods
         /// <summary>
         /// Get string representation of polynomial
