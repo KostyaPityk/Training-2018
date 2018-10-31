@@ -48,7 +48,6 @@ namespace ConsoleBankTests
                 service.CloseAccount(temp);
                 Console.WriteLine(temp.ToString());
             }
-            Console.ReadKey();
         }
     }
 }
