@@ -1,14 +1,29 @@
 ﻿using System;
 using Bank.Account.Account_Factories;
-using Bank.Account;
+using Bank.Account.AccountType;
+using Bank.Repository;
+using Bank.GenerateAccountNumber;
 
 namespace Bank.BankService
 {
     public class BankService : IBankService
     {
+        private IRepository _repository;
+
+        public IRepository Repository
+        {
+            get => _repository;
+            set => _repository = value ?? throw new ArgumentException(nameof(value), "can't be equal to null!");
+        }
+
+        public BankService(IRepository repository)
+        {
+            Repository = repository;
+        }
         public void CloseAccount(Account.Account account)
         {
             account.Status = AccountStatus.Closed;
+            Repository.Close(account);
         }
 
         public void Deposit(Account.Account account, decimal sum)
@@ -16,10 +31,11 @@ namespace Bank.BankService
             account.Deposit(sum);
         }
 
-        public void OpenAccount(AccountHolder.AccountHolder holder, AccountFactory accountFactory, string generatorId)
+        public void OpenAccount(AccountHolder.AccountHolder holder, AccountFactory accountFactory, INumberGenerate generatorId)
         {
             Account.Account new_account = accountFactory.CreateNewAccount(holder, generatorId);
             holder.AddAccount(new_account);
+            Repository.Save(new_account);
         }
 
         public void FrozenAccount(Account.Account account)

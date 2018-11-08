@@ -1,10 +1,11 @@
 ﻿using Bank.Account.Account_Factories;
+using Bank.GenerateAccountNumber;
 
 namespace Bank.BankService
 {
     public interface IBankService
     {
-        void OpenAccount(AccountHolder.AccountHolder holder, AccountFactory accountFactory, string generatorId);
+        void OpenAccount(AccountHolder.AccountHolder holder, AccountFactory accountFactory, INumberGenerate generatorId);
 
         void CloseAccount(Account.Account accountNumber);
 

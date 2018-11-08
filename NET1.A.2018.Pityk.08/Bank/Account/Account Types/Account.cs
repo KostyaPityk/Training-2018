@@ -1,5 +1,6 @@
 ﻿using System;
 using Bank.AccountHolder;
+using Bank.GenerateAccountNumber;
 
 namespace Bank.Account
 {
@@ -92,10 +93,10 @@ namespace Bank.Account
         /// <param name="holder">Holder of account</param>
         /// <param name="generatorId">Account ID</param>
         /// <param name="defaultBonus">Bonus of this account at deposit</param>
-        public Account(AccountHolder.AccountHolder holder, string generatorId, decimal defaultBonus)
+        public Account(AccountHolder.AccountHolder holder, INumberGenerate generatorId, decimal defaultBonus)
         {
             Holder = holder;
-            _accountNumber = generatorId;
+            _accountNumber = generatorId.GenerateAccountNumberId();
             DefaultBonus = defaultBonus;
             Status = BankService.AccountStatus.Open;
         }
@@ -107,10 +108,10 @@ namespace Bank.Account
         /// <param name="generatorId">Account ID</param>
         /// <param name="defaultBonus">Bonus of this account at deposit</param>
         /// <param name="balance">Balance of this account</param>
-        public Account(AccountHolder.AccountHolder holder, string generatorId, decimal defaultBonus, decimal balance)
+        public Account(AccountHolder.AccountHolder holder, INumberGenerate generatorId, decimal defaultBonus, decimal balance)
         {
             Holder = holder;
-            _accountNumber = generatorId;
+            _accountNumber = generatorId.GenerateAccountNumberId();
             DefaultBonus = defaultBonus;
             Status = BankService.AccountStatus.Open;
             Balance = balance;
@@ -124,10 +125,10 @@ namespace Bank.Account
         /// <param name="defaultBonus">Bonus of this account at deposit</param>
         /// <param name="balance">Balance of this account</param>
         /// <param name="bonusPoints">Bonus point of this account which depends of type account</param>
-        public Account(AccountHolder.AccountHolder holder, string generatorId, decimal defaultBonus, decimal balance, int bonusPoints)
+        public Account(AccountHolder.AccountHolder holder, INumberGenerate generatorId, decimal defaultBonus, decimal balance, int bonusPoints)
         {
             Holder = holder;
-            _accountNumber = generatorId;
+            _accountNumber = generatorId.GenerateAccountNumberId();
             DefaultBonus = defaultBonus;
             Status = BankService.AccountStatus.Open;
             Balance = balance;

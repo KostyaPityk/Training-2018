@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bank
+namespace Bank.GenerateAccountNumber
 {
-    public class Bank
+    public interface INumberGenerate
     {
-
+        string GenerateAccountNumberId();
     }
 }
