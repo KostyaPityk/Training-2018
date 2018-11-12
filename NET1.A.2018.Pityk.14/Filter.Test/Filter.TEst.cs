@@ -25,6 +25,10 @@ namespace FilterTest
         public void TestTransformer_AddedString_ValidData_ValidResult(IEnumerable<string> data, string line, IEnumerable<string> expected)
         => CollectionAssert.AreEqual(data.Transformer(x => x + line), expected);
 
+        [TestCase(new string[] { "one", "two", "three", "four", "five" },  new string[] { "Now one", "Now two", "Now three", "Now four", "Now five" })]
+        public void TestTransformer_AddedNowToString_ValidData_ValidResult(IEnumerable<string> data, IEnumerable<string> expected)
+       => CollectionAssert.AreEqual(data.Transformer(new ITransormerAdapter()), expected);
+
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, 3, new int[] { 4, 5, 6, 7, 8 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, 1, new int[] { 2, 3, 4, 5, 6 })]
         [TestCase(new int[] { 1, 2, 3, 4, 5 }, 4, new int[] { 5, 6, 7, 8, 9 })]
